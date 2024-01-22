@@ -2,6 +2,8 @@ const game = () => {
   let pScore = 0;
   let cScore = 0;
 
+  const winner = document.querySelector('.winner');
+
   //Start the game
   const startGame = () => {
     const playBtn = document.querySelector('.intro button');
@@ -27,25 +29,39 @@ const game = () => {
     });
 
     //Computer Options
+
     const computerOptions = ['rock', 'paper', 'scissors'];
 
-    options.forEach(options => {
-      options.addEventListener('click', function () {
-        //Computer Choice
-        const computerNumber = Math.trunc(Math.random() * 3);
-        const computerChoice = computerOptions[computerNumber];
-        setTimeout(() => {
-          //Here is where we call compare hands
-          compareHands(this.textContent, computerChoice);
+    const resetImage = function () {
+      playerHand.src = './assets/rock.png';
+      computerHand.src = `./assets/rock.png`;
+    };
 
-          //Update images
-          playerHand.src = `./assets/${this.textContent}.png`;
-          computerHand.src = `./assets/${computerChoice}.png`;
-        }, 2000);
-        //Animaiton
-        playerHand.style.animation = 'shakePlayer 2s ease';
-        computerHand.style.animation = 'shakeComputer 2s ease';
-      });
+    const playMatch = function () {
+      //Computer Choice
+      const computerNumber = Math.trunc(Math.random() * 3);
+      const computerChoice = computerOptions[computerNumber];
+      winner.textContent = 'Shaking';
+
+      setTimeout(() => {
+        //Here is where we call compare hands
+        compareHands(this.textContent, computerChoice);
+
+        //Update images
+        playerHand.src = `./assets/${this.textContent}.png`;
+        computerHand.src = `./assets/${computerChoice}.png`;
+      }, 2000);
+
+      // Reset player's hand image
+      resetImage();
+
+      //Animaiton
+      playerHand.style.animation = 'shakePlayer 2s ease';
+      computerHand.style.animation = 'shakeComputer 2s ease';
+    };
+
+    options.forEach(options => {
+      options.addEventListener('click', playMatch);
     });
   };
 
@@ -58,7 +74,7 @@ const game = () => {
 
   const compareHands = (playerChoice, computerChoice) => {
     //Update text
-    const winner = document.querySelector('.winner');
+
     //Checking for a tie.
     if (playerChoice === computerChoice) {
       winner.textContent = 'It is a tie.';
