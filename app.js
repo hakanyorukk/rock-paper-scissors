@@ -75,12 +75,12 @@ const game = () => {
   const compareHands = (playerChoice, computerChoice) => {
     //Update text
 
-    //Checking for a tie.
+    //Checking for a tie
     if (playerChoice === computerChoice) {
-      winner.textContent = 'It is a tie.';
-      updateScore();
+      winner.textContent = 'It is a tie';
       return;
     }
+
     //Check for Rock
     if (playerChoice === 'rock') {
       if (computerChoice === 'scissors') {
@@ -88,13 +88,14 @@ const game = () => {
         pScore++;
         updateScore();
         return;
+      } else {
+        winner.textContent = 'Computer won!';
+        cScore++;
+        updateScore();
+        return;
       }
-    } else {
-      winner.textContent = 'Computer won!';
-      cScore++;
-      updateScore();
-      return;
     }
+
     //Check for paper
     if (playerChoice === 'paper') {
       if (computerChoice === 'rock') {
@@ -102,13 +103,14 @@ const game = () => {
         pScore++;
         updateScore();
         return;
+      } else {
+        winner.textContent = 'Computer won!';
+        cScore++;
+        updateScore();
+        return;
       }
-    } else {
-      winner.textContent = 'Computer won!';
-      cScore;
-      updateScore();
-      return;
     }
+
     //Check for scissors
     if (playerChoice === 'scissors') {
       if (computerChoice === 'paper') {
@@ -116,12 +118,12 @@ const game = () => {
         pScore++;
         updateScore();
         return;
+      } else {
+        winner.textContent = 'Computer won!';
+        cScore++;
+        updateScore();
+        return;
       }
-    } else {
-      winner.textContent = 'Computer won!';
-      cScore++;
-      updateScore();
-      return;
     }
   };
 
